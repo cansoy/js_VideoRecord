@@ -5,6 +5,8 @@ const stopRecord=document.querySelector('#stop-record')
 const takeSnap=document.querySelector('#take-snap')
 const recorderVideoContainer=document.querySelector('.recorder-video-container')
 const snapPhotoContanier=document.querySelector('.snap-image-container')
+const getVideoBtn=document.querySelector('#get-video')
+const dbDiv=document.querySelector('.db')
 
 const chunks=[]
 
@@ -84,7 +86,18 @@ const openCamera=async()=>{
 }
 openCameraBtn.addEventListener('click',openCamera)
 ////////////////////////////////////////////////////////////////
-
+getVideoBtn.addEventListener('click', async(e)=>{
+    dbDiv.innerHTML=""
+    const response=await fetch('./db/vid_5.mp4')
+    const blob=await response.blob()
+    const dbVideoSrc=URL.createObjectURL(blob)
+    const dbVideo=document.createElement('video')
+    dbVideo.width=300
+    dbVideo.height=300
+    dbVideo.controls=true
+    dbVideo.src=dbVideoSrc
+    dbDiv.appendChild(dbVideo)
+})
 
 
 
